@@ -1,242 +1,228 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Giao Diện Thuê Dịch Vụ</title>
-   
-   <!-- Bootstrap 5 CSS -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-   <!-- FontAwesome Icon -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <!-- Select2 CSS -->
-   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cày Thuê - Hạt Giống</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-   <style>
-       body {
-           background-color: #f4f6f9;
-           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-           padding: 15px;
-       }
+    .form-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      border: 1px solid #eef2f7;
+    }
 
-       .card-custom {
-           border: none;
-           border-radius: 12px;
-           box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-           background: #fff;
-           margin-bottom: 20px;
-       }
+    /* Badge số thứ tự 1, 2, 3 */
+    .step-badge {
+      width: 28px;
+      height: 28px;
+      background-color: #0d6efd;
+      color: white;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      margin-right: 8px;
+    }
 
-       .step-number {
-           background-color: #0d6efd;
-           color: #fff;
-           width: 28px;
-           height: 28px;
-           border-radius: 50%;
-           display: inline-flex;
-           align-items: center;
-           justify-content: center;
-           font-weight: bold;
-           font-size: 14px;
-           margin-right: 8px;
-       }
+    .step-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+    }
 
-       .section-title {
-           font-size: 16px;
-           font-weight: 700;
-           color: #333;
-           display: flex;
-           align-items: center;
-           padding: 15px;
-           border-bottom: 1px solid #f0f0f0;
-       }
+    /* Style cho các ô input */
+    .custom-input-group .input-group-text {
+      background-color: #f8f9fa;
+      border-color: #dee2e6;
+      color: #6c757d;
+    }
 
-       /* Tùy chỉnh Select2 cho giống giao diện mẫu */
-       .select2-container--default .select2-selection--single {
-           height: 48px;
-           border: 1px solid #ced4da;
-           border-radius: 8px;
-           display: flex;
-           align-items: center;
-       }
+    .form-control, .form-select {
+      border-color: #dee2e6;
+      padding: 0.6rem 0.75rem;
+      font-size: 14px;
+    }
 
-       .select2-container--default .select2-selection--single .select2-selection__rendered {
-           color: #495057;
-           padding-left: 15px;
-           font-size: 15px;
-           line-height: normal;
-       }
+    .form-control:focus, .form-select:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    }
 
-       .select2-container--default .select2-selection--single .select2-selection__arrow {
-           height: 46px;
-           right: 10px;
-       }
+    /* Subtext chú thích */
+    .sub-text {
+      font-size: 12px;
+      color: #6c757d;
+    }
 
-       /* Tùy chỉnh danh sách Dropdown khi xổ xuống */
-       .select2-dropdown {
-           border-radius: 8px;
-           border: 1px solid #dee2e6;
-           box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-       }
+    /* Nút Tạo Đơn Hàng */
+    .btn-submit-order {
+      background-color: #93a5e6;
+      color: #ffffff;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
 
-       .select2-results__option {
-           padding: 10px 15px;
-           font-size: 14px;
-           border-bottom: 1px dashed #eee;
-       }
+    .btn-submit-order:hover {
+      background-color: #8194dc;
+      color: #ffffff;
+    }
 
-       .select2-container--default .select2-results__option--highlighted[aria-selected] {
-           background-color: #e9ecef;
-           color: #000;
-       }
-
-       .price-tag {
-           font-weight: 600;
-           color: #0d6efd;
-       }
-   </style>
+    /* Bàn tay nhấp chuột & vô hiệu hóa nút khi bấm */
+    .btn-submit-order:disabled {
+      background-color: #c0caf0;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container max-width-md" style="max-width: 600px;">
+<div class="container py-4" style="max-width: 850px;">
 
-   <!-- Buớc 1: Chọn gói -->
-   <div class="card card-custom">
-       <div class="section-title">
-           <span class="step-number">1</span> Chọn Gói Cần Thuê
-       </div>
-       <div class="card-body">
-           <div class="mb-3">
-               <select class="form-select select2-service" style="width: 100%;">
-                   <option value="" selected disabled>Tìm và chọn dịch vụ cần thuê...</option>
-                   <option value="1">HẠT SỒI - 1000 HẠT - 70,000 đ</option>
-                   <option value="2">HẠT SỒI - 200 HẠT - 16,000 đ</option>
-                   <option value="3">HẠT NGÔ - 2.000 HẠT - 35,000 đ</option>
-                   <option value="4">HẠT NGÔ - 1.000 HẠT - 16,000 đ</option>
-                   <option value="5">BAMBO (TRE)-30000 HẠT - 40,000 đ</option>
-                   <option value="6">BAMBO (TRE)-100000 HẠT - 80,000 đ</option>
-                   <option value="7">BAMBO (TRE)-10000 HẠT - 16,000 đ</option>
-                   <option value="8">SUN BLOM + MOON BLOOM - 5,000 đ</option>
-                   <option value="9">star fruit - 15,000 đ</option>
-                   <option value="10">HAT MEGA - 50 HAT - 16,000 đ</option>
-                   <option value="11">Hypno Bloom 🌸 - 8 HAT - 16,000 đ</option>
-                   <option value="12">VENUS FLY TRAP - 10 HAT - 10,000 đ</option>
-                   <option value="13">MOON BLOOM 🌸 - 8 HAT - 16,000 đ</option>
-                   <option value="14">VENOM SPITTER 🐍 - 6 HAT - 16,000 đ</option>
-                   <option value="15">GHOST PEPPER 👻 - 6 HAT - 16,000 đ</option>
-                   <option value="16">DRAGON BREATH 🔥 - 6 HAT - 16,000 đ</option>
-                   <option value="17">HẠT RAINBOW (HẠT BẢY MÀU)- 100 HẠT - 16,000 đ</option>
-                   <option value="18">HẠT GOLD (HẠT VÀNG)-500 HAT - 20,000 đ</option>
-               </select>
-           </div>
-       </div>
-   </div>
+  <!-- Form Đặt Hàng -->
+  <form id="orderForm">
 
-   <!-- Bước 2: Thông tin tài khoản -->
-   <div class="card card-custom">
-       <div class="section-title">
-           <span class="step-number">2</span> Thông Tin Tài Khoản
-       </div>
-       <div class="card-body">
-           <div class="mb-3">
-               <label class="form-label text-secondary small fw-bold">Tài Khoản</label>
-               <div class="input-group">
-                   <span class="input-group-text bg-light"><i class="fa-regular fa-user"></i></span>
-                   <input type="text" class="form-control" placeholder="Nhập tài khoản cần cày">
-               </div>
-           </div>
-           
-           <div class="mb-3">
-               <label class="form-label text-secondary small fw-bold">Mật Khẩu</label>
-               <div class="input-group">
-                   <span class="input-group-text bg-light"><i class="fa-solid fa-lock"></i></span>
-                   <input type="password" class="form-control" placeholder="Nhập mật khẩu của tài khoản đó">
-               </div>
-           </div>
+    <!-- Tiêu đề trang -->
+    <div class="text-center mb-3">
+      <h3 class="fw-bold text-uppercase" style="letter-spacing: 1px;">CÀY THUÊ - HẠT GIỐNG</h3>
+    </div>
 
-           <div class="mb-3">
-               <label class="form-label text-secondary small fw-bold">Cookie / 2FA</label>
-               <input type="text" class="form-control" placeholder="Có thể nhập chuỗi 2FA, link ga...">
-               <div class="form-text text-muted small mt-1">
-                   <i class="fa-regular fa-circle-question"></i> Dữ liệu này không bắt buộc, có thể bỏ trống
-               </div>
-           </div>
-       </div>
-   </div>
+    <!-- Thanh thông báo chạy (Marquee) -->
+    <div class="alert alert-danger text-center p-2 mb-4 fw-bold text-uppercase" style="border-radius: 30px; font-size: 14px;">
+      <marquee behavior="scroll" direction="left" scrollamount="6">
+        ĐIỀN ĐÚNG THÔNG TIN CẦN THIẾT HOẶC LIÊN HỆ ADMIN || CUỐI TRANG || ĐỂ HOÀN THÀNH ĐƠN
+      </marquee>
+    </div>
+
+    <!-- BƯỚC 1: Chọn Gói Cần Thuê -->
+    <div class="form-card p-4 mb-4">
+      <div class="d-flex align-items-center mb-3">
+        <span class="step-badge">1</span>
+        <span class="step-title">Chọn Gói Cần Thuê</span>
+      </div>
+      
+      <select class="form-select" id="packageSelect" required>
+        <option value="" selected disabled>Tìm và chọn dịch vụ cần thuê...</option>
+        <option value="1">HẠT GIỐNG - 200 HẠT - 35,000 đ</option>
+        <option value="2">HẠT GIỐNG - 500 HẠT - 16,000 đ</option>
+        <option value="3">HẠT GIỐNG - 2,000 HẠT - 35,000 đ</option>
+        <option value="4">BAMBOO (TRE) - 30,000 HẠT - 40,000 đ</option>
+        <option value="5">BAMBOO (TRE) - 100,000 HẠT - 80,000 đ</option>
+        <option value="6">SUN BLOOM ~ MOON BLOOM - 5,000 đ</option>
+        <option value="7">star fruit - 15,000 đ</option>
+        <option value="8">HYDRA BLOOM - 8 HẠT - 16,000 đ</option>
+      </select>
+    </div>
+
+    <!-- BƯỚC 2: Thông Tin Tài Khoản -->
+    <div class="form-card p-4 mb-4">
+      <div class="d-flex align-items-center mb-3">
+        <span class="step-badge">2</span>
+        <span class="step-title">Thông Tin Tài Khoản</span>
+      </div>
+
+      <div class="row g-3 mb-3">
+        <!-- Tài khoản -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold text-secondary" style="font-size: 14px;">Tài Khoản</label>
+          <div class="input-group custom-input-group">
+            <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
+            <input type="text" class="form-control" id="username" placeholder="Nhập tài khoản cần cày" required>
+          </div>
+        </div>
+
+        <!-- Mật khẩu -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold text-secondary" style="font-size: 14px;">Mật Khẩu</label>
+          <div class="input-group custom-input-group">
+            <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+            <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu của tài khoản đó" required>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cookie / 2FA -->
+      <div class="mb-1">
+        <label class="form-label fw-semibold text-secondary" style="font-size: 14px;">Cookie / 2FA</label>
+        <input type="text" class="form-control" placeholder="Có thể nhập chuỗi 2FA, link game pass hoặc cookie liên quan">
+      </div>
+      <div class="sub-text">
+        <i class="fa-regular fa-circle-question me-1"></i>Dữ liệu này không bắt buộc, có thể bỏ trống
+      </div>
+    </div>
+
+    <!-- BƯỚC 3: Ghi Chú & Xác Nhận -->
+    <div class="form-card p-4 mb-4">
+      <div class="d-flex align-items-center mb-3">
+        <span class="step-badge">3</span>
+        <span class="step-title">Ghi Chú & Xác Nhận</span>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-secondary" style="font-size: 14px;">Ghi Chú</label>
+        <textarea class="form-control" rows="3" maxlength="500" placeholder="Nhập ghi chú cho admin nếu có..."></textarea>
+        <div class="text-end sub-text mt-1">0 / 500</div>
+      </div>
+
+      <!-- Khu vực nút bấm thanh toán -->
+      <div class="text-center mt-4">
+        <p class="sub-text mb-2 fw-semibold" id="noticeMsg">Vui lòng chọn gói cần thuê</p>
+        <button type="submit" id="btnSubmit" class="btn-submit-order shadow-sm">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="btnText">Tạo Đơn Hàng</span>
+        </button>
+      </div>
+    </div>
+
+  </form>
 
 </div>
 
-<!-- Thư viện JQuery & Select2 JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+<!-- JavaScript Xử Lý Chuyển Trang -->
 <script>
-   $(document).ready(function() {
-       // Khởi tạo Select2 với ô tìm kiếm
-       $('.select2-service').select2({
-           placeholder: "Tìm và chọn dịch vụ cần thuê...",
-           allowClear: true,
-           language: {
-               noResults: function() {
-                   return "Không tìm thấy dịch vụ phù hợp";
-               }
-           }
-       });
-   });
+  // CẤU HÌNH TRANG WEB ĐÍCH BẠN MUỐN CHUYỂN TỚI TẠI ĐÂY
+  const REDIRECT_URL = "https://google.com"; // Thay bằng URL trang lịch sử đơn hàng/trang mới của bạn
+
+  document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Ngăn trang web reload lại ngay lập tức
+
+    const btn = document.getElementById('btnSubmit');
+    const btnText = document.getElementById('btnText');
+    const noticeMsg = document.getElementById('noticeMsg');
+
+    // 1. Đổi trạng thái nút bấm (để tránh người dùng nhấp nhiều lần)
+    btn.disabled = true;
+    btnText.innerText = "Đang tạo đơn hàng...";
+    noticeMsg.innerText = "Đang xử lý, vui lòng chờ trong giây lát...";
+    noticeMsg.style.color = "#0d6efd";
+
+    // 2. Chờ 1 giây giả lập xử lý xong và nhảy sang web khác
+    setTimeout(function() {
+      // Đổi sang đường dẫn trang web mới
+      window.location.href = REDIRECT_URL;
+    }, 1200); // 1200ms = 1.2 giây
+  });
 </script>
 
 </body>
 </html>
-<!-- Khối Tạo Đơn Hàng -->
-<div class="create-order-container">
-  <p class="notice-text">Vui lòng chọn gói cần thuê</p>
-  <button type="button" class="btn-create-order">
-    <!-- Icon giỏ hàng SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-    </svg>
-    <span>Tạo Đơn Hàng</span>
-  </button>
-</div>
-
-<style>
-  .create-order-container {
-    text-align: center;
-    padding: 20px 0;
-  }
-
-  .notice-text {
-    color: #94a3b8; /* Màu xám chữ */
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-
-  .btn-create-order {
-    background: linear-gradient(135deg, #a3b8f8, #8e9fe6); /* Màu tím xanh nhạt gradient nhẹ */
-    background-color: #93a5e6; /* Màu nền dự phòng */
-    color: #ffffff;
-    border: none;
-    padding: 10px 28px;
-    border-radius: 12px; /* Góc bo tròn rộng */
-    font-size: 16px;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(147, 165, 230, 0.3);
-    transition: all 0.2s ease;
-  }
-
-  .btn-create-order:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
-  }
-
-  .btn-create-order:active {
-    transform: translateY(0);
-  }
-</style>
