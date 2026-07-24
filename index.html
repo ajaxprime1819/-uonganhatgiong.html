@@ -15,6 +15,23 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
+    /* Styles cho Navigation Bar */
+    .top-navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .user-balance-badge {
+      background-color: #eef2ff;
+      color: #4f46e5;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      border: 1px solid #c7d2fe;
+    }
+
+    /* Card Form Styles */
     .form-card {
       background: #ffffff;
       border-radius: 12px;
@@ -22,7 +39,6 @@
       border: 1px solid #eef2f7;
     }
 
-    /* Badge số thứ tự 1, 2, 3 */
     .step-badge {
       width: 28px;
       height: 28px;
@@ -43,31 +59,6 @@
       color: #333;
     }
 
-    /* Style cho các ô input */
-    .custom-input-group .input-group-text {
-      background-color: #f8f9fa;
-      border-color: #dee2e6;
-      color: #6c757d;
-    }
-
-    .form-control, .form-select {
-      border-color: #dee2e6;
-      padding: 0.6rem 0.75rem;
-      font-size: 14px;
-    }
-
-    .form-control:focus, .form-select:focus {
-      border-color: #0d6efd;
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
-    }
-
-    /* Subtext chú thích */
-    .sub-text {
-      font-size: 12px;
-      color: #6c757d;
-    }
-
-    /* Nút Tạo Đơn Hàng */
     .btn-submit-order {
       background-color: #93a5e6;
       color: #ffffff;
@@ -87,21 +78,73 @@
       background-color: #8194dc;
       color: #ffffff;
     }
-
-    /* Bàn tay nhấp chuột & vô hiệu hóa nút khi bấm */
-    .btn-submit-order:disabled {
-      background-color: #c0caf0;
-      cursor: not-allowed;
-    }
   </style>
 </head>
 <body>
 
-<div class="container py-4" style="max-width: 850px;">
+<!-- ================= PHẦN HEADER / THỜI THƯỢNG ================= -->
+<nav class="navbar navbar-expand-lg top-navbar mb-4 py-2">
+  <div class="container" style="max-width: 950px;">
+    <!-- Logo / Tên Shop -->
+    <a class="navbar-brand fw-bold text-primary" href="#">
+      <i class="fa-solid fa-gamepad me-1"></i> SHOP DỊCH VỤ
+    </a>
 
-  <!-- Form Đặt Hàng -->
+    <!-- Nút Menu thu nhỏ cho Điện thoại -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Các Menu Nạp Tiền / Tài Khoản -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center gap-2 mt-2 mt-lg-0">
+        
+        <!-- Nút Nạp Tiền -->
+        <li class="nav-item">
+          <a class="btn btn-danger btn-sm rounded-pill px-3 font-weight-bold" href="/nap-tien">
+            <i class="fa-solid fa-wallet me-1"></i> Nạp Tiền
+          </a>
+        </li>
+
+        <!-- Hiển thị Số dư Tài Khoản -->
+        <li class="nav-item">
+          <span class="user-balance-badge">
+            <i class="fa-solid fa-coins text-warning me-1"></i> Số dư: 150,000đ
+          </span>
+        </li>
+
+        <!-- Dropdown Thông tin Tài khoản / Đăng xuất -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="fa-regular fa-circle-user text-primary fs-5 align-middle me-1"></i>
+            <span>Nguyễn Văn A</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2">
+            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-clock-rotate-left me-2 text-muted"></i>Lịch sử đơn hàng</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user-gear me-2 text-muted"></i>Đổi mật khẩu</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất</a></li>
+          </ul>
+        </li>
+
+        <!-- HOẶC Nếu CHƯA ĐĂNG NHẬP (Chỉ hiển thị khi khách là Khách vãng lai) -->
+        <!--
+        <li class="nav-item">
+          <a class="btn btn-outline-primary btn-sm rounded-pill px-3" href="/login">
+            <i class="fa-solid fa-right-to-bracket me-1"></i> Đăng Nhập
+          </a>
+        </li>
+        -->
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= PHẦN FORM TẠO ĐƠN HÀNG ================= -->
+<div class="container py-2" style="max-width: 850px;">
+
   <form id="orderForm">
-
     <!-- Tiêu đề trang -->
     <div class="text-center mb-3">
       <h3 class="fw-bold text-uppercase" style="letter-spacing: 1px;">CÀY THUÊ - HẠT GIỐNG</h3>
@@ -126,11 +169,6 @@
         <option value="1">HẠT GIỐNG - 200 HẠT - 35,000 đ</option>
         <option value="2">HẠT GIỐNG - 500 HẠT - 16,000 đ</option>
         <option value="3">HẠT GIỐNG - 2,000 HẠT - 35,000 đ</option>
-        <option value="4">BAMBOO (TRE) - 30,000 HẠT - 40,000 đ</option>
-        <option value="5">BAMBOO (TRE) - 100,000 HẠT - 80,000 đ</option>
-        <option value="6">SUN BLOOM ~ MOON BLOOM - 5,000 đ</option>
-        <option value="7">star fruit - 15,000 đ</option>
-        <option value="8">HYDRA BLOOM - 8 HẠT - 16,000 đ</option>
       </select>
     </div>
 
@@ -142,32 +180,26 @@
       </div>
 
       <div class="row g-3 mb-3">
-        <!-- Tài khoản -->
         <div class="col-md-6">
           <label class="form-label fw-semibold text-secondary" style="font-size: 14px;">Tài Khoản</label>
-          <div class="input-group custom-input-group">
+          <div class="input-group">
             <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
-            <input type="text" class="form-control" id="username" placeholder="Nhập tài khoản cần cày" required>
+            <input type="text" class="form-control" placeholder="Nhập tài khoản cần cày" required>
           </div>
         </div>
 
-        <!-- Mật khẩu -->
         <div class="col-md-6">
           <label class="form-label fw-semibold text-secondary" style="font-size: 14px;">Mật Khẩu</label>
-          <div class="input-group custom-input-group">
+          <div class="input-group">
             <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-            <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu của tài khoản đó" required>
+            <input type="password" class="form-control" placeholder="Nhập mật khẩu" required>
           </div>
         </div>
       </div>
 
-      <!-- Cookie / 2FA -->
       <div class="mb-1">
         <label class="form-label fw-semibold text-secondary" style="font-size: 14px;">Cookie / 2FA</label>
-        <input type="text" class="form-control" placeholder="Có thể nhập chuỗi 2FA, link game pass hoặc cookie liên quan">
-      </div>
-      <div class="sub-text">
-        <i class="fa-regular fa-circle-question me-1"></i>Dữ liệu này không bắt buộc, có thể bỏ trống
+        <input type="text" class="form-control" placeholder="Có thể nhập chuỗi 2FA, link game pass hoặc cookie...">
       </div>
     </div>
 
@@ -181,46 +213,29 @@
       <div class="mb-3">
         <label class="form-label fw-semibold text-secondary" style="font-size: 14px;">Ghi Chú</label>
         <textarea class="form-control" rows="3" maxlength="500" placeholder="Nhập ghi chú cho admin nếu có..."></textarea>
-        <div class="text-end sub-text mt-1">0 / 500</div>
       </div>
 
-      <!-- Khu vực nút bấm thanh toán -->
       <div class="text-center mt-4">
-        <p class="sub-text mb-2 fw-semibold" id="noticeMsg">Vui lòng chọn gói cần thuê</p>
+        <p class="sub-text mb-2 fw-semibold text-muted">Vui lòng chọn gói cần thuê</p>
         <button type="submit" id="btnSubmit" class="btn-submit-order shadow-sm">
           <i class="fa-solid fa-cart-shopping"></i>
-          <span id="btnText">Tạo Đơn Hàng</span>
+          <span>Tạo Đơn Hàng</span>
         </button>
       </div>
     </div>
-
   </form>
 
 </div>
 
-<!-- JavaScript Xử Lý Chuyển Trang -->
+<!-- Bootstrap 5 JS (Cần thiết để bật menu dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-  // CẤU HÌNH TRANG WEB ĐÍCH BẠN MUỐN CHUYỂN TỚI TẠI ĐÂY
-  const REDIRECT_URL = "https://google.com"; // Thay bằng URL trang lịch sử đơn hàng/trang mới của bạn
-
+  // Chuyển hướng trang sau khi bấm Tạo đơn hàng
   document.getElementById('orderForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Ngăn trang web reload lại ngay lập tức
-
-    const btn = document.getElementById('btnSubmit');
-    const btnText = document.getElementById('btnText');
-    const noticeMsg = document.getElementById('noticeMsg');
-
-    // 1. Đổi trạng thái nút bấm (để tránh người dùng nhấp nhiều lần)
-    btn.disabled = true;
-    btnText.innerText = "Đang tạo đơn hàng...";
-    noticeMsg.innerText = "Đang xử lý, vui lòng chờ trong giây lát...";
-    noticeMsg.style.color = "#0d6efd";
-
-    // 2. Chờ 1 giây giả lập xử lý xong và nhảy sang web khác
-    setTimeout(function() {
-      // Đổi sang đường dẫn trang web mới
-      window.location.href = REDIRECT_URL;
-    }, 1200); // 1200ms = 1.2 giây
+    e.preventDefault();
+    alert("Tạo đơn hàng thành công! Đang chuyển hướng...");
+    window.location.href = "https://google.com"; // Thay URL trang đích tại đây
   });
 </script>
 
