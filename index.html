@@ -180,7 +180,7 @@
         <p class="sub-notice">Điền đúng thông tin cần thiết hoặc liên hệ Admin | Cuối trang | Để hoàn thành đơn</p>
 
         <div class="form-card">
-            <form action="#" method="POST">
+            <form id="orderForm">
                 
                 <!-- BƯỚC 1 -->
                 <div class="form-group">
@@ -210,7 +210,7 @@
                         <span>Thông Tin Liên Hệ / Liên Kết</span>
                     </div>
                     <label class="field-label">Đường dẫn (Link Facebook / Discord / Profile Game / Zalo)</label>
-                    <input type="url" class="custom-input" placeholder="https://zalo.me/0392192506" required>
+                    <input type="url" class="custom-input" placeholder="https://facebook.com/u/xxx hoặc link profile game..." required>
                 </div>
 
                 <!-- BƯỚC 3 -->
@@ -249,12 +249,26 @@
     </div>
 
     <script>
-        // Tự động đếm số ký tự ô Ghi chú
+        // Đếm số ký tự ghi chú
         const noteInput = document.getElementById('noteInput');
         const charCount = document.getElementById('charCount');
 
         noteInput.addEventListener('input', () => {
             charCount.textContent = noteInput.value.length;
+        });
+
+        // Xử lý sự kiện bấm nút Tạo Đơn Hàng
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn trang reload mặc định
+
+            // ĐIỀN LINK BẠN MUỐN CHUYỂN ĐẾN Ở ĐÂY:
+            const targetUrl = "https://zalo.me/0123456789"; 
+
+            // Chuyển hướng sang trang mới
+            window.location.href = targetUrl;
+            
+            // Nếu muốn mở ở tab mới hoàn toàn, dùng dòng dưới thay cho dòng trên:
+            // window.open(targetUrl, '_blank');
         });
     </script>
 </body>
