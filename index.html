@@ -103,7 +103,7 @@
         }
 
         /* INPUT, SELECT, TEXTAREA */
-        .custom-select, .custom-input, .custom-textarea {
+        .custom-select, .custom-textarea {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #cbd5e1;
@@ -114,7 +114,7 @@
             background-color: #fff;
         }
 
-        .custom-select:focus, .custom-input:focus, .custom-textarea:focus {
+        .custom-select:focus, .custom-textarea:focus {
             border-color: #7c3aed;
         }
 
@@ -182,7 +182,7 @@
         <div class="form-card">
             <form id="orderForm">
                 
-                <!-- BƯỚC 1 -->
+                <!-- BƯỚC 1: CÁC GÓI MỚI ĐÃ ĐƯỢC THAY THẾ Ở ĐÂY -->
                 <div class="form-group">
                     <div class="step-title">
                         <span class="step-num">1</span>
@@ -190,33 +190,29 @@
                     </div>
                     <select class="custom-select" required>
                         <option value="" disabled selected>Tìm và chọn gói dịch vụ cần thuê...</option>
-                        <option value="1">HẠT 100 - 800 HẠT - 16,000 đ</option>
-                        <option value="2">HẠT 500 - 200 HẠT - 16,000 đ</option>
-                        <option value="3">HẠT 500 - 2,000 HẠT - 35,000 đ</option>
-                        <option value="4">HẠT 1000 - 200 HẠT - 16,000 đ</option>
-                        <option value="5">BAMBOO (TRE) - 30000 HẠT - 40,000 đ</option>
-                        <option value="6">BAMBOO (TRE) - 100000 HẠT - 90,000 đ</option>
-                        <option value="7">SUN BLOSSOM - MOON BLOOM - 5,000 đ</option>
-                        <option value="8">VENUS FLY TRAP - 10,000 đ</option>
-                        <option value="9">DRAGON BREATH - 8 HẠT - 16,000 đ</option>
-                        <option value="10">HẠT RAINBOW (HẠT BẢY MÀU) 100 HẠT - 20,000 đ</option>
+                        <option value="1">Star Fruit - 60.000đ/4 hạt</option>
+                        <option value="2">Hạt mega - 100 hạt 20.000đ</option>
+                        <option value="3">Hạt Ngô - 2000 hạt 32.000đ</option>
+                        <option value="4">Bamboo (Tre)🎋 - 10000 hạt 13.000đ</option>
+                        <option value="5">Bamboo (Tre)🎋 - 100000 hạt 100.000đ</option>
+                        <option value="6">Sun Bloom☀️ - 10 hạt 30.000đ</option>
+                        <option value="7">Hypno Bloom - 10 hạt 20.000đ</option>
+                        <option value="8">Venus Fly Trap - 10 hạt 10.000đ</option>
+                        <option value="9">Moon Bloom🌙 - 10 hạt 20.000đ</option>
+                        <option value="10">Ghost Pepper 🌶️ - 10 hạt 20.000đ</option>
+                        <option value="11">Dragon Breath🐉 - 10 hạt 30.000đ</option>
+                        <option value="12">Hạt Gold - 500 hạt 20.000đ</option>
+                        <option value="13">Hạt Rainbow - 100 hạt 22.000đ</option>
+                        <option value="14">Hạt Sồi - 1000 hạt 70.000đ</option>
+                        <option value="15">Hạt Sồi - 300 hạt 25.000đ</option>
+                        <option value="16">Hạt Ngô - 1000 hạt 20.000đ</option>
                     </select>
                 </div>
 
-                <!-- BƯỚC 2: LIÊN KẾT / THÔNG TIN LIÊN HỆ -->
+                <!-- BƯỚC 2 -->
                 <div class="form-group">
                     <div class="step-title">
                         <span class="step-num">2</span>
-                        <span>Thông Tin Liên Hệ / Liên Kết</span>
-                    </div>
-                    <label class="field-label">Đường dẫn (Link Facebook / Discord / Profile Game / Zalo)</label>
-                    <input type="url" class="custom-input" placeholder="https://facebook.com/u/xxx hoặc link profile game..." required>
-                </div>
-
-                <!-- BƯỚC 3 -->
-                <div class="form-group">
-                    <div class="step-title">
-                        <span class="step-num">3</span>
                         <span>Xác Nhận Đặt Hàng</span>
                     </div>
                     <div class="info-box">
@@ -224,10 +220,10 @@
                     </div>
                 </div>
 
-                <!-- BƯỚC 4 -->
+                <!-- BƯỚC 3 -->
                 <div class="form-group">
                     <div class="step-title">
-                        <span class="step-num">4</span>
+                        <span class="step-num">3</span>
                         <span>Ghi Chú & Xác Nhận</span>
                     </div>
                     <label class="field-label">Ghi Chú</label>
@@ -237,7 +233,7 @@
 
                 <!-- NÚT TẠO ĐƠN HÀNG -->
                 <div class="action-area">
-                    <p class="warning-text">Vui lòng chọn gói cần thuê và điền đầy đủ thông tin</p>
+                    <p class="warning-text">Vui lòng chọn gói cần thuê</p>
                     <button type="submit" class="btn-submit">
                         🛒 Tạo Đơn Hàng
                     </button>
@@ -257,18 +253,14 @@
             charCount.textContent = noteInput.value.length;
         });
 
-        // Xử lý sự kiện bấm nút Tạo Đơn Hàng
+        // Xử lý chuyển hướng khi bấm nút Tạo Đơn Hàng
         document.getElementById('orderForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Ngăn trang reload mặc định
+            event.preventDefault(); 
 
-            // ĐIỀN LINK BẠN MUỐN CHUYỂN ĐẾN Ở ĐÂY:
+            // THAY LINK BẠN MUỐN CHUYỂN ĐẾN TẠI ĐÂY:
             const targetUrl = "https://zalo.me/0123456789"; 
 
-            // Chuyển hướng sang trang mới
             window.location.href = targetUrl;
-            
-            // Nếu muốn mở ở tab mới hoàn toàn, dùng dòng dưới thay cho dòng trên:
-            // window.open(targetUrl, '_blank');
         });
     </script>
 </body>
